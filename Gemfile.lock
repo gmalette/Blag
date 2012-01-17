@@ -1,0 +1,14 @@
+GEM
+  remote: http://rubygems.org/
+  specs:
+    rack (1.4.0)
+    rdiscount (1.6.8)
+    simple_router (0.9.8.1)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  rack
+  rdiscount
+  simple_router
