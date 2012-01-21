@@ -9,7 +9,7 @@ end
 module Blag
   
   Options = {
-    :manifest_path  => "tmp/manifest.yml",
+    :manifest_path  => "config/manifest.yml",
     :cache_control  => 3600,
     :articles_path  => "./articles/"
   }
