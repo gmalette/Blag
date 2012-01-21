@@ -8,6 +8,7 @@ require './blag'
 namespace :blag do
   desc "Creates the file manifest"
   task :manifest do
-    
+    Dir[File.join(BLAG_ROOT, "articles", "*")].each do |article|
+    end
   end
 end
