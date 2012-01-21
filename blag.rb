@@ -1,7 +1,7 @@
 BLAG_ROOT = File.dirname(__FILE__)
 $:.unshift BLAG_ROOT
 
-%w(rack rack/request yaml rdiscount date lib/article lib/manifest stringex).each do |req|
+%w(rack rack/request yaml rdiscount date lib/article lib/manifest lib/engine stringex).each do |req|
   require req
 end
 
@@ -18,30 +18,6 @@ module Blag
     :filing => %r{ /(?<filing> [\w]+)(/)?(?<year> [0-9]{4} )?(/)?(?<month> [0-9]{2})?(/)?(?<day> [0-9]{2})?(/)?(?<slug>.*)? }x
   }
   
-  class Blag    
-    
-    def initialize
-    end
-    
-    def call env
-      request = Rack::Request.new(env)
-      status, headers, body = nil, nil, nil
-      Routes.detect do |k, v|
-        if (match = env['PATH_INFO'].match(v)) != nil
-          status, headers, body = self.send(k, match)
-        end
-        status && headers && body
-      end
-      
-      [200,{"Content-Type"=> "text/html"},["<h1>Hello, World!</h1>"]]
-    end
-    
-    def filing match
-      articles = Article.find :date => match, :filing => match[:filing], :slug => match[:slug]
-      puts articles.inspect, match.inspect
-    end
-  end
-  
   def self.configure &block
     self.instance_eval(&block) if block_given?
   end
@@ -55,6 +31,6 @@ module Blag
   end
   
   def self.instance
-    @@instance ||= Blag.new
+    @@instance ||= Engine.new
   end
 end
