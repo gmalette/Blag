@@ -18,7 +18,8 @@ module Blag
     end
     
     def manifest
-      @manifest ||= Manifest.new
+      (@manifest ||= Manifest.new) if Blag.get(:load_manifest)
+      @manifest || Manifest.new
     end
     
     def articles match

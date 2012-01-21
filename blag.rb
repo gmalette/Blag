@@ -11,7 +11,8 @@ module Blag
   Options = {
     :manifest_path  => "config/manifest.yml",
     :cache_control  => 3600,
-    :articles_path  => "./articles/"
+    :articles_path  => "./articles/",
+    :load_manifest  => true
   }
   
   Routes = {
