@@ -3,7 +3,7 @@ require './blag.rb'
 use Rack::Reloader
 
 
-app = Blag::Blag.new do
+Blag::configure do
 end
 
-run app
+run Blag::instance

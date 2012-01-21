@@ -1,7 +1,7 @@
 BLAG_ROOT = File.dirname(__FILE__)
 $:.unshift BLAG_ROOT
 
-%w(rack rack/request yaml rdiscount date lib/article).each do |req|
+%w(rack rack/request yaml rdiscount date lib/article lib/manifest).each do |req|
   require req
 end
 
@@ -19,9 +19,8 @@ module Blag
   }
   
   class Blag    
-
-    def initialize &block
-      self.instance_eval(&block) if block_given?
+    
+    def initialize
     end
     
     def call env
@@ -41,9 +40,21 @@ module Blag
       articles = Article.find :date => match, :filing => match[:filing], :slug => match[:slug]
       puts articles.inspect, match.inspect
     end
-    
-    def set key, value
-      Options[key] = value
-    end
+  end
+  
+  def self.configure &block
+    self.instance_eval(&block) if block_given?
+  end
+  
+  def self.get key
+    Options[key]
+  end
+  
+  def self.set key, value
+    Options[key] = value
+  end
+  
+  def self.instance
+    @@instance ||= Blag.new
   end
 end
