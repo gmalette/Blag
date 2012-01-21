@@ -1,5 +1,5 @@
 title: Test Something Something
-date: July 3rd 2011
+date: 03/07/2011
 tags: [Toto, Titi, Tata]
 
 Toto is a greate blog CMS, but Blag is 1337
