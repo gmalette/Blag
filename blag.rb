@@ -1,7 +1,7 @@
 BLAG_ROOT = File.dirname(__FILE__)
 $:.unshift BLAG_ROOT
 
-%w(rack rack/request yaml rdiscount date lib/article lib/manifest lib/engine stringex).each do |req|
+%w(rack rack/request yaml stringex rdiscount date lib/template lib/article lib/manifest lib/engine).each do |req|
   require req
 end
 
