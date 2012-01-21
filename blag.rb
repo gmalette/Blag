@@ -1,4 +1,5 @@
 BLAG_ROOT = File.dirname(__FILE__)
+BOOT_TIME = Time.now
 $:.unshift BLAG_ROOT
 
 %w(rack rack/request yaml stringex rdiscount date lib/template lib/article lib/manifest lib/engine).each do |req|
@@ -12,11 +13,12 @@ module Blag
     :manifest_path  => "config/manifest.yml",
     :cache_control  => 3600,
     :articles_path  => "./articles/",
-    :load_manifest  => true
+    :load_manifest  => true,
+    :cache_path => "tmp/cache"
   }
   
   Routes = {
-    :filing => %r{ /(?<filing> [\w]+)(/)?(?<year> [0-9]{4} )?(/)?(?<month> [0-9]{2})?(/)?(?<day> [0-9]{2})?(/)?(?<slug>.*)? }x
+    :articles => %r{ /(?<year> [0-9]{4} )?(/)?(?<month> [0-9]{2})?(/)?(?<day> [0-9]{2})?(/)?(?<slug>.*)? }x
   }
   
   def self.configure &block
