@@ -1,4 +1,3 @@
-require 'rack'
 require './blag.rb'
 
 use Rack::Reloader

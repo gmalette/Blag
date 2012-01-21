@@ -1,12 +1,10 @@
-require 'rack'
-require 'rack/request'
-require 'yaml'
-require 'rdiscount'
-require 'simple_router'
-require './lib/article'
-
 BLAG_ROOT = File.dirname(__FILE__)
 $:.unshift BLAG_ROOT
+
+%w(rack rack/request yaml rdiscount date lib/article).each do |req|
+  require req
+end
+
 
 module Blag
   
@@ -21,12 +19,8 @@ module Blag
   }
   
   class Blag    
-    def run!
-      run self
-    end
-    
+
     def initialize &block
-      Article::manifest!
       self.instance_eval(&block) if block_given?
     end
     
