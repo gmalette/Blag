@@ -10,9 +10,12 @@ class Manifest
     end
   end
   
-  def add_article article
-    metas = YAML.parse(File.read(article).split("\n\n")[0]).transform
-    @infos[:articles][slug(metas['title'])] = article
+  def add_article path
+    metas = YAML.parse(File.read(path).split("\n\n")[0]).transform
+    @infos[:articles][slug(metas['title'])] = {
+      :path => path.match(/#{BLAG_ROOT}(.*)/)[1],
+      :date => metas['date']
+    }
   end
   
   def slug title
